@@ -12,8 +12,8 @@ Vagrant.configure(2) do |config|
 
   # Configure provisioning
   config.vm.synced_folder "config/", "/home/vagrant/sync"
-  config.vm.provision "shell", path: "users.sh"
-  config.vm.provision "shell", path: "dependencies.sh"
-  config.vm.provision "shell", path: "database_config.sh"
+  config.vm.provision "shell", path: "scripts/users.sh"
+  config.vm.provision "shell", path: "scripts/dependencies.sh"
+  config.vm.provision "shell", path: "scripts/database_config.sh"
 
 end
