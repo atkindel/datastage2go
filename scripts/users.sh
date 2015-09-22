@@ -4,10 +4,10 @@ COLOR_RST="\033[0m"
 # Create main user
 echo -e "${COLOR}---Adding main user...---${COLOR_RST}"
 
-  sudo adduser databoss
-  sudo adduser databoss sudo
+  sudo adduser dataman
+  sudo adduser dataman sudo
   sudo adduser vagrant sudo
-  echo "databoss:databoss" | chpasswd
+  echo "dataman:dataman" | chpasswd
 
 # Done making users
 echo -e "${COLOR}---Finished adding main user.---${COLOR_RST}"
