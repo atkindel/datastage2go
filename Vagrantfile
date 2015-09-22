@@ -20,5 +20,6 @@ Vagrant.configure(2) do |config|
   config.vm.provision "shell", path: "scripts/dependencies.sh"
   config.vm.provision "shell", path: "scripts/database_config.sh"
   config.vm.provision "shell", path: "scripts/aws_config.sh"
+  config.vm.provision "shell", path: "scripts/openedx_etl.sh"
 
 end
