@@ -10,6 +10,10 @@ Vagrant.configure(2) do |config|
     vb.name = "datastage2go"
   end
 
+  # Ensure vbguest updates
+  config.vbguest.auto_reboot = true
+  config.vbguest.auto_update = true
+
   # Configure provisioning
   config.vm.synced_folder "config/", "/home/vagrant/sync"
   config.vm.provision "shell", path: "scripts/users.sh"

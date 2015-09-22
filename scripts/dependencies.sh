@@ -7,8 +7,8 @@ echo -e "${COLOR}---Installing system modules...---${COLOR_RST}"
   echo -e "${COLOR}---git---${COLOR_RST}"
   sudo apt-get -y install git
 
-  # echo -e "${COLOR}---virtualenvwrapper---${COLOR_RST}"
-  # sudo apt-get -y install virtualenvwrapper
+  echo -e "${COLOR}---virtualenvwrapper---${COLOR_RST}"
+  sudo apt-get -y install virtualenvwrapper
 
   echo -e "${COLOR}---MySQL server---${COLOR_RST}"
   sudo apt-get -y install debconf-utils > /dev/null
@@ -28,6 +28,9 @@ echo -e "${COLOR}---Installing system modules...---${COLOR_RST}"
   echo -e "${COLOR}---Python interface to MySQL---${COLOR_RST}"
   sudo apt-get -y install python-mysqldb
 
+  echo -e "${COLOR}---Python autoenv---${COLOR_RST}"
+  yes | sudo pip install autoenv
+
   echo -e "${COLOR}---GNU Parallel---${COLOR_RST}"
   sudo apt-get -y install parallel
 
@@ -37,19 +40,13 @@ echo -e "${COLOR}---Installing system modules...---${COLOR_RST}"
   echo -e "${COLOR}---Amazon S3 CLI---${COLOR_RST}"
   sudo apt-get -y install s3cmd
 
-  # echo -e "${COLOR}---Remote machine backups---${COLOR_RST}"
-  # sudo apt-get -y install sshfs
-
   echo -e "${COLOR}---PHP---${COLOR_RST}"
   sudo apt-get -y install php5
   sudo apt-get -y install php5-mysqlnd
   sudo php5enmod mysqli
 
-  # echo -e "${COLOR}---Python autoenv---${COLOR_RST}"
-  # yes | sudo pip install autoenv
-
-  # echo -e "${COLOR}---Numpy---${COLOR_RST}"
-  # yes | sudo pip install numpy  #Turn off numpy unless really needed
+  echo -e "${COLOR}---Numpy---${COLOR_RST}"
+  yes | sudo pip install numpy
 
 
 # Disable apparmor
