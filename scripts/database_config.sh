@@ -29,6 +29,16 @@ echo -e "${COLOR}---Cloning OpenEdX ETL software...---${COLOR_RST}"
   cd json_to_relation
   sudo python setup.py install
 
+  cd ..
+  git clone https://github.com/paepcke/online_learning_computations.git
+  cd online_learning_computations
+  sudo python setup.py install
+
+  cd ..
+  git clone https://github.com/Stanford-Online/forum_etl.git
+  cd forum_etl
+  python setup.py install
+
 
 # Create data export directories
 echo -e "${COLOR}---Making data output directories...---${COLOR_RST}"
