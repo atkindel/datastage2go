@@ -30,6 +30,7 @@ echo -e "${COLOR}---Cloning OpenEdX ETL software...---${COLOR_RST}"
   git clone https://github.com/Stanford-Online/forum_etl.git
   cd forum_etl
   python setup.py install
+  # look at this as an example for openedx_etl.sh
 
 
 # Create data export directories
@@ -78,3 +79,6 @@ echo -e "${COLOR}---Preparing database...---${COLOR_RST}"
   echo -e "${COLOR}---Creating empty databases...---${COLOR_RST}"
   echo "forumkeypassphrase" > scripts/forumKeyPassphrase.txt
   yes Y | sudo scripts/createEmptyEdxDbs.sh
+
+
+echo -e "${COLOR}---Finished database configuration.---${COLOR_RST}"

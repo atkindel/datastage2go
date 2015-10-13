@@ -9,3 +9,8 @@ echo -e "${COLOR}---Configuring AWS credentials...---${COLOR_RST}"
   sudo cp /home/vagrant/sync/limits.conf /etc/security/limits.conf
   sudo cp /home/vagrant/sync/s3.txt /home/dataman/.s3cfg
   sudo cp /home/vagrant/sync/boto.cfg /home/dataman/.boto
+
+  sudo cp /home/vagrant/sync/s3.txt /root/.s3cfg
+  sudo cp /home/vagrant/sync/boto.cfg /root/.boto
+
+echo -e "${COLOR}---Finished AWS configuration.---${COLOR_RST}"
