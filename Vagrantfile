@@ -14,12 +14,14 @@ Vagrant.configure(2) do |config|
   config.vbguest.auto_reboot = true
   config.vbguest.auto_update = true
 
-  # Configure provisioning
-  config.vm.synced_folder "config/", "/home/vagrant/sync"
+  # Provision software
   config.vm.provision "shell", path: "scripts/users.sh"
   config.vm.provision "shell", path: "scripts/dependencies.sh"
   config.vm.provision "shell", path: "scripts/database_config.sh"
+
+  # Provision AWS configuration files
+  config.vm.provision "file", source: "~/.ssh/.boto", destination: "/home/vagrant/sync/.boto"
+  config.vm.provision "file", source: "~/.ssh/.s3cfg", destination: "/home/vagrant/sync/.s3cfg"
   config.vm.provision "shell", path: "scripts/aws_config.sh"
-  # config.vm.provision "shell", path: "scripts/openedx_etl.sh"
 
 end

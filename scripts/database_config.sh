@@ -2,15 +2,6 @@ COLOR="\033[1;35m"
 COLOR_RST="\033[0m"
 
 
-# Git setup
-echo -e "${COLOR}---Configuring git...---${COLOR_RST}"
-
-  source /home/vagrant/sync/git.cfg
-  git config --global user.email "$gituseremail"
-  git config --global user.name "$gitusername"
-  git config --global push.default simple
-
-
 # Clone needed repositories
 echo -e "${COLOR}---Cloning OpenEdX ETL software...---${COLOR_RST}"
 
@@ -21,16 +12,25 @@ echo -e "${COLOR}---Cloning OpenEdX ETL software...---${COLOR_RST}"
   cd json_to_relation
   sudo python setup.py install
 
-  cd ..
-  git clone https://github.com/paepcke/online_learning_computations.git
-  cd online_learning_computations
-  sudo python setup.py install
+  ## Below repositories are optional, but potentially helpful.
+  ## Note that online_learning_computations requires numpy.
 
-  cd ..
-  git clone https://github.com/Stanford-Online/forum_etl.git
-  cd forum_etl
-  python setup.py install
-  # look at this as an example for openedx_etl.sh
+  # cd ..
+  # git clone https://github.com/paepcke/online_learning_computations.git
+  # cd online_learning_computations
+  # sudo python setup.py install
+  #
+  # cd ..
+  # git clone https://github.com/paepcke/forum_etl.git
+  # cd forum_etl
+  # python setup.py install
+
+
+echo -e "${COLOR}---Excluding default partitioning...---${COLOR_RST}"
+
+  sudo sed -i "s/tableName == 'EdxTrackEvent'/tableName == 'NULL_TABLE'/g" /home/dataman/Code/json_to_relation/json_to_relation/edxTrackLogJSONParser.py
+  sudo sed -i '163,193d' scripts/createEmptyEdxDbs.sql
+  sudo sed -i '162s/$/;/' scripts/createEmptyEdxDbs.sql
 
 
 # Create data export directories
@@ -56,9 +56,10 @@ echo -e "${COLOR}---Setup MySQL authentication...---${COLOR_RST}"
   echo "password=root" >> /root/.my.cnf
 
   cd /home/dataman/Code/json_to_relation
-  sed -i "s/--login-path=root//g" scripts/createEmptyEdxDbs.sh
+  sudo sed -i "s/--login-path=root//g" scripts/createEmptyEdxDbs.sh
+  sudo sed -i "s/--login-path=root/-u root -p\$password/g" scripts/executeCSVBulkLoad.sh
   mysql_config_editor set --login-path=client --user=root
-  sudo chmod -R 777 /var/lib/mysql/
+  sudo chmod -R 777 /var/lib/mysql
 
 
 # Prepare database
@@ -79,6 +80,5 @@ echo -e "${COLOR}---Preparing database...---${COLOR_RST}"
   echo -e "${COLOR}---Creating empty databases...---${COLOR_RST}"
   echo "forumkeypassphrase" > scripts/forumKeyPassphrase.txt
   yes Y | sudo scripts/createEmptyEdxDbs.sh
-
 
 echo -e "${COLOR}---Finished database configuration.---${COLOR_RST}"

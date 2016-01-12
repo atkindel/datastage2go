@@ -6,7 +6,6 @@ echo -e "${COLOR}---Adding main user...---${COLOR_RST}"
 
   sudo adduser dataman
   sudo adduser dataman sudo
-  sudo adduser vagrant sudo
   echo "dataman:dataman" | chpasswd
 
 # Done making users

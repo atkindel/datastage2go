@@ -45,8 +45,9 @@ echo -e "${COLOR}---Installing system modules...---${COLOR_RST}"
   sudo apt-get -y install php5-mysqlnd
   sudo php5enmod mysqli
 
-  echo -e "${COLOR}---Numpy---${COLOR_RST}"
-  yes | sudo pip install numpy
+  # Numpy not needed unless using optional software-- see repo clones in database_config.sh
+  # echo -e "${COLOR}---Numpy---${COLOR_RST}"
+  # yes | sudo pip install numpy
 
 
 # Disable apparmor
