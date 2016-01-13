@@ -54,6 +54,8 @@ echo -e "${COLOR}---Setup MySQL authentication...---${COLOR_RST}"
 
   echo "[client]" >> /root/.my.cnf
   echo "password=root" >> /root/.my.cnf
+  # sudo rm /etc/mysql/my.cnf
+  # sudo cp /home/vagrant/sync/my.cnf /etc/mysql/
 
   cd /home/dataman/Code/json_to_relation
   sudo sed -i "s/--login-path=root//g" scripts/createEmptyEdxDbs.sh
