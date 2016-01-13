@@ -17,7 +17,7 @@ Vagrant.configure(2) do |config|
   # Provision software
   config.vm.provision "shell", path: "scripts/users.sh"
   config.vm.provision "shell", path: "scripts/dependencies.sh"
-  config.vm.provision "file", source: "~/.ssh/my.cnf", destination: "/home/vagrant/sync/my.cnf"
+  # config.vm.provision "file", source: "~/.ssh/my.cnf", destination: "/home/vagrant/sync/my.cnf"
   config.vm.provision "shell", path: "scripts/database_config.sh"
 
   # Provision AWS configuration files
