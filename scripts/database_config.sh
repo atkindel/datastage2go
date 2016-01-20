@@ -44,6 +44,11 @@ echo -e "${COLOR}---Cloning OpenEdX ETL software...---${COLOR_RST}"
   # sudo sed -i '163,193d' scripts/createEmptyEdxDbs.sql
   # sudo sed -i '162s/$/;/' scripts/createEmptyEdxDbs.sql
 
+echo -e "${COLOR}---Setting up localization...---${COLOR_RST}"
+
+  LOCAL_MODULESTORE_MACHINE="None"
+  sudo sed -i "s/EDX_PLATFORM_DUMP_MACHINE=jenkins.prod.class.stanford.edu/EDX_PLATFORM_DUMP_MACHINE=${LOCAL_MODULESTORE_MACHINE}/g" /home/dataman/Code/json_to_relation/scripts/cronRefreshModuleStore.sh
+
 
 # Create data export directories
 echo -e "${COLOR}---Making data output directories...---${COLOR_RST}"
