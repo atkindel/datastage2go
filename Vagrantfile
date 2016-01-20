@@ -24,10 +24,13 @@ Vagrant.configure(2) do |config|
   config.vbguest.auto_reboot = true
   config.vbguest.auto_update = true
 
+  # Set modulestore location
+  modulestore_location = "None"
+
   # Provision software
   config.vm.provision "shell", path: "scripts/users.sh"
   config.vm.provision "shell", path: "scripts/dependencies.sh"
-  config.vm.provision "shell", path: "scripts/database_config.sh"
+  config.vm.provision "shell", path: "scripts/database_config.sh", args: modulestore_location
 
   # Provision AWS configuration files
   config.vm.provision "file", source: "~/.ssh/.boto", destination: "/home/vagrant/sync/.boto"
