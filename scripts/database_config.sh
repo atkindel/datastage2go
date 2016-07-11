@@ -18,6 +18,7 @@ echo -e "${COLOR}---Cloning OpenEdX ETL software...---${COLOR_RST}"
 
   mkdir /home/dataman/Code/
   sudo chmod 777 /home/dataman/Code/
+
   cd /home/dataman/Code/
   git clone https://github.com/paepcke/json_to_relation.git
   cd json_to_relation
@@ -26,15 +27,33 @@ echo -e "${COLOR}---Cloning OpenEdX ETL software...---${COLOR_RST}"
   ## Below repositories are optional, but potentially helpful.
   ## Note that online_learning_computations requires numpy.
 
+  # # Web export interface
+  # cd ..
+  # git clone https://github.com/paepcke/open_edx_class_export.git
+  # cd open_edx_class_export
+  # sudo python setup.py install
+  #
+  # # Engagement computations
   # cd ..
   # git clone https://github.com/paepcke/online_learning_computations.git
   # cd online_learning_computations
   # sudo python setup.py install
   #
+  # # IRT computations
+  # cd ..
+  # git clone https://github.com/atkindel/oex_irt
+  #
+  # # OpenEdX forum ETL
   # cd ..
   # git clone https://github.com/paepcke/forum_etl.git
   # cd forum_etl
-  # python setup.py install
+  # sudo python setup.py install
+  #
+  # # Qualtrics survey ETL
+  # cd ..
+  # git clone https://github.com/paepcke/qualtrics_etl.git
+  # cd qualtrics_etl
+  # sudo python setup.py install
 
 ## The code below disables partitioning on the primary event log table. Use with caution.
 
@@ -96,5 +115,8 @@ echo -e "${COLOR}---Preparing database...---${COLOR_RST}"
   echo -e "${COLOR}---Creating empty databases...---${COLOR_RST}"
   echo "forumkeypassphrase" > scripts/forumKeyPassphrase.txt
   yes Y | sudo scripts/createEmptyEdxDbs.sh
+
+  sudo mongod
+  sudo mysqld
 
 echo -e "${COLOR}---Finished database configuration.---${COLOR_RST}"
