@@ -120,4 +120,7 @@ echo -e "${COLOR}---Preparing database...---${COLOR_RST}"
   sudo mongod
   sudo mysqld
 
+  cd /home/dataman
+  sudo chown -R dataman:dataman Code Data
+
 echo -e "${COLOR}---Finished database configuration.---${COLOR_RST}"
