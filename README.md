@@ -10,6 +10,10 @@ Install Vagrant, Virtualbox, and Ubuntu base box:
 * `sudo apt-get install virtualbox`
 * Ensure Vagrant version is up-to-date (vagrantup.com)
 * `vagrant box add ubuntu/trusty64`
+* `vagrant plugin install vagrant-vbguest`
+* Increase the disk size of the VM to 100G (modify if necessary): 
+`source 
+./bootstrap.sh`
 
 `Vagrantfile`:
 * Set `modulestore_location` to equal hostname where modulestore database backups (MongoDB `bson` files) live.
