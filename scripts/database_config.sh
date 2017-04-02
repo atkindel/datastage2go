@@ -102,6 +102,8 @@ echo -e "${COLOR}---Setup MySQL authentication...---${COLOR_RST}"
 echo -e "${COLOR}---Preparing database...---${COLOR_RST}"
 
   cd /home/dataman/Code/json_to_relation
+  sudo mongod
+  sudo mysqld start
 
   echo -e "${COLOR}---Building user permissions...---${COLOR_RST}"
   DBSETUP="CREATE DATABASE IF NOT EXISTS unittest;
@@ -117,8 +119,6 @@ echo -e "${COLOR}---Preparing database...---${COLOR_RST}"
   echo "forumkeypassphrase" > scripts/forumKeyPassphrase.txt
   yes Y | sudo scripts/createEmptyEdxDbs.sh
 
-  sudo mongod
-  sudo mysqld
 
   cd /home/dataman
   sudo chown -R dataman:dataman Code Data
