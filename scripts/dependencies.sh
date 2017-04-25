@@ -20,7 +20,7 @@ echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
 echo -e "${COLOR}---Installing system modules...---${COLOR_RST}"
 
   echo -e "${COLOR}---Python Daemon---${COLOR_RST}"
-  sudo apt-get install python-daemon
+  sudo apt-get install -y python-daemon
 
   echo -e "${COLOR}---git---${COLOR_RST}"
   sudo apt-get -y install git
