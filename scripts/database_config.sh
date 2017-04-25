@@ -12,6 +12,9 @@
 COLOR="\033[1;35m"
 COLOR_RST="\033[0m"
 
+echo -e "${COLOR}---Installing Python Daemon...---${COLOR_RST}"
+  
+  sudo apt-get install python-daemon
 
 # Clone needed repositories
 echo -e "${COLOR}---Cloning OpenEdX ETL software...---${COLOR_RST}"

@@ -19,6 +19,9 @@ echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
 # Install system modules
 echo -e "${COLOR}---Installing system modules...---${COLOR_RST}"
 
+  echo -e "${COLOR}---Python Daemon---${COLOR_RST}"
+  sudo apt-get install python-daemon
+
   echo -e "${COLOR}---git---${COLOR_RST}"
   sudo apt-get -y install git
 
@@ -62,6 +65,7 @@ echo -e "${COLOR}---Installing system modules...---${COLOR_RST}"
 
   echo -e "${COLOR}---Numpy---${COLOR_RST}"
   yes | sudo pip install numpy
+
 
 
 # Disable apparmor
