@@ -48,6 +48,7 @@ sudo chmod 777 /home/ec2-user/dataman/Data/
  
 echo -e "${COLOR}---Setup MySQL authentication...---${COLOR_RST}"
 
+sudo rm ~/.my.cnf
 echo "[client]" >> ~/.my.cnf
 echo "user=root" >> ~/.my.cnf
 echo "password=${MYSQL_ROOT_PASSWORD}" >> ~/.my.cnf
