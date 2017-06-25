@@ -2,17 +2,17 @@ yes Y | sudo yum install docker
 yes Y | sudo yum install mysql
 yes Y | sudo yum install python
 
-docker pull mysql:5.7
+docker pull mysql:latest
 
 
 CONTAINER_NAME="edx-database"
 MYSQL_ROOT_PASSWORD="password" # CHANGE HERE TO CHANGE THE ROOT PASSWORD
 
 docker run --detach \
+  --publish 3306:3306 \
   --env MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD} \
   --name ${CONTAINER_NAME} \
-  --publish 3306:3306 \
-  mysql:5.7;
+  mysql:latest;
 
 COLOR="\033[1;35m"
 COLOR_RST="\033[0m"
@@ -53,14 +53,16 @@ echo "user=root" >> ~/.my.cnf
 echo "password=${MYSQL_ROOT_PASSWORD}" >> ~/.my.cnf
 echo "port=3306" >> ~/.my.cnf
 echo "host=${MYSQL_CONTAINER_IP}" >> ~/.my.cnf
+echo "bind-address=${MYSQL_CONTAINER_IP}" >> ~/.my.cnf
 
 cd /home/ec2-user/dataman/Code/json_to_relation
 sed -i "s/--login-path=root//g" scripts/createEmptyEdxDbs.sh
 sed -i "s/--login-path=root/-u root -p\$password/g" scripts/executeCSVBulkLoad.sh
 
 echo -e "${COLOR}---Preparing database...---${COLOR_RST}"
-sleep 5
+sleep 10
 
+cd /home/ec2-user/dataman/Code/json_to_relation
 DBSETUP="CREATE DATABASE IF NOT EXISTS unittest;
          FLUSH PRIVILEGES;
          CREATE USER 'unittest'@'localhost' IDENTIFIED BY 'unittest';
@@ -76,11 +78,11 @@ echo -e "${COLOR}---Creating empty databases...---${COLOR_RST}"
 echo "forumkeypassphrase" > scripts/forumKeyPassphrase.txt # CHANGE THIS TO REFLECT THE FORUM KEY PASSPHRASE
 
 echo "About to create tables"
-mysql < ~/dataman/json_to_relation/scripts/createEmptyEdxDbs.sql
+mysql < scripts/createEmptyEdxDbs.sql
 echo "Done creating tables"
 
 echo "About to create procedures and functions."
-  FORUM_KEY_PASSPHRASE=$(cat forumKeyPassphrase.txt)
+  FORUM_KEY_PASSPHRASE=$(cat scripts/forumKeyPassphrase.txt)
 
   KEY_INSTALL_CMD="DROP TABLE IF EXISTS EdxPrivate.Keys; \
                    CREATE TABLE EdxPrivate.Keys (forumKey varchar(255) DEFAULT ''); \
@@ -88,13 +90,13 @@ echo "About to create procedures and functions."
 
   mysql EdxPrivate -e "$KEY_INSTALL_CMD"
 
-  mysql Edx < ~/dataman/json_to_relation/scripts/mysqlProcAndFuncBodies.sql 
-  mysql EdxPrivate < ~/dataman/json_to_relation/scripts/mysqlProcAndFuncBodies.sql 
-  mysql EdxForum < ~/dataman/json_to_relation/scripts/mysqlProcAndFuncBodies.sql 
-  mysql EdxPiazza < ~/dataman/json_to_relation/scripts/mysqlProcAndFuncBodies.sql 
-  mysql edxprod < ~/dataman/json_to_relation/scripts/mysqlProcAndFuncBodies.sql 
-  mysql EdxQualtrics < ~/dataman/json_to_relation/scripts/mysqlProcAndFuncBodies.sql 
-  mysql unittest < ~/dataman/json_to_relation/scripts/mysqlProcAndFuncBodies.sql 
+  mysql Edx < scripts/mysqlProcAndFuncBodies.sql 
+  mysql EdxPrivate < scripts/mysqlProcAndFuncBodies.sql 
+  mysql EdxForum < scripts/mysqlProcAndFuncBodies.sql 
+  mysql EdxPiazza < scripts/mysqlProcAndFuncBodies.sql 
+  mysql edxprod < scripts/mysqlProcAndFuncBodies.sql 
+  mysql EdxQualtrics < scripts/mysqlProcAndFuncBodies.sql 
+  mysql unittest < scripts/mysqlProcAndFuncBodies.sql 
 
 echo "Done creating procedures and functions."
 
