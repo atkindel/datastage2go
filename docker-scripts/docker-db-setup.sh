@@ -52,9 +52,9 @@ echo "host=${MYSQL_CONTAINER_IP}" >> ~/.my.cnf
 cd /home/ec2-user/dataman/Code/json_to_relation
 sed -i "s/--login-path=root//g" scripts/createEmptyEdxDbs.sh
 sed -i "s/--login-path=root/-u root -p\$password/g" scripts/executeCSVBulkLoad.sh
-chmod -R 777 /var/lib/mysql
 
 echo -e "${COLOR}---Preparing database...---${COLOR_RST}"
+sleep 5
 
 DBSETUP="CREATE DATABASE IF NOT EXISTS unittest;
          FLUSH PRIVILEGES;
