@@ -67,6 +67,7 @@ DBSETUP="CREATE DATABASE IF NOT EXISTS unittest;
          CREATE USER 'unittest'@'localhost' IDENTIFIED BY 'unittest';
          CREATE USER 'dataman'@'localhost' IDENTIFIED BY 'dataman';
          CREATE USER 'dataman'@'%' IDENTIFIED BY 'dataman';
+         CREATE USER '%'@'%' IDENTIFIED BY 'dataman';
          GRANT ALL ON unittests.* TO 'unittest'@'localhost';
          GRANT ALL ON *.* TO 'dataman'@'localhost';
          GRANT ALL ON *.* TO 'dataman'@'%';"
