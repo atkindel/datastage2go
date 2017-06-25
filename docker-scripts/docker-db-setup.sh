@@ -1,6 +1,6 @@
-yes Y | yum install docker
-yes Y | yum install mysql
-yes Y | yum install python
+yes Y | sudo yum install docker
+yes Y | sudo yum install mysql
+yes Y | sudo yum install python
 
 docker pull mysql:5.7
 
