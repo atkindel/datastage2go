@@ -12,9 +12,8 @@
 COLOR="\033[1;35m"
 COLOR_RST="\033[0m"
 
-echo -e "${COLOR}---Installing Python Daemon...---${COLOR_RST}"
-  
-  sudo apt-get install python-daemon
+sudo apt-get update
+sudo apt-get install -y mysql-client-5.5
 
 # Clone needed repositories
 echo -e "${COLOR}---Cloning OpenEdX ETL software...---${COLOR_RST}"
@@ -105,8 +104,8 @@ echo -e "${COLOR}---Setup MySQL authentication...---${COLOR_RST}"
 echo -e "${COLOR}---Preparing database...---${COLOR_RST}"
 
   cd /home/dataman/Code/json_to_relation
-  sudo mongod
-  sudo mysqld start
+  sudo mongod --dbpath /home/dataman/Data/ --fork --logpath
+  /home/dataman/Data/mongo.log
 
   echo -e "${COLOR}---Building user permissions...---${COLOR_RST}"
   DBSETUP="CREATE DATABASE IF NOT EXISTS unittest;
@@ -116,7 +115,7 @@ echo -e "${COLOR}---Preparing database...---${COLOR_RST}"
            GRANT ALL ON unittests.* TO 'unittest'@'localhost';
            GRANT ALL ON *.* TO 'dataman'@'localhost';
            GRANT ALL ON *.* TO 'dataman'@'%';"
-  sudo mysql -e "$DBSETUP"
+  sudo mysql -e "$DBSETUP" -uroot -pmypassword -h 172.17.0.2 -P 3306
 
   echo -e "${COLOR}---Creating empty databases...---${COLOR_RST}"
   echo "forumkeypassphrase" > scripts/forumKeyPassphrase.txt
