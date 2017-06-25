@@ -44,6 +44,7 @@ sudo chmod 777 /home/ec2-user/dataman/Data/
 echo -e "${COLOR}---Setup MySQL authentication...---${COLOR_RST}"
 
 echo "[client]" >> ~/.my.cnf
+echo "user=root" >> ~/.my.cnf
 echo "password=${MYSQL_ROOT_PASSWORD}" >> ~/.my.cnf
 echo "port=3306" >> ~/.my.cnf
 echo "host=${MYSQL_CONTAINER_IP}" >> ~/.my.cnf
