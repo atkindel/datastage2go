@@ -1,5 +1,4 @@
-sudo -i
-
+sudo su
 docker pull mysql:5.7
 
 echo CONTAINER_NAME="edx-database" >> /root/.bashrc
