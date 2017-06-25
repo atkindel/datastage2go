@@ -18,6 +18,7 @@ echo $MYSQL_CONTAINER_IP
 
 echo -e "${COLOR}---Cloning OpenEdX ETL software...---${COLOR_RST}"
 
+mkdir /home/ec2-user/dataman/
 mkdir /home/ec2-user/dataman/Code/
 sudo chmod 777 /home/ec2-user/dataman/Code
 
@@ -42,10 +43,10 @@ sudo chmod 777 /home/ec2-user/dataman/Data/
  
 echo -e "${COLOR}---Setup MySQL authentication...---${COLOR_RST}"
 
-echo "[client]" >> /root/.my.cnf
-echo "password=${MYSQL_ROOT_PASSWORD}" >> /root/.my.cnf
-echo "port=3306" >> /root/.my.cnf
-echo "host=${MYSQL_CONTAINER_IP}" >> /root/.my.cnf
+echo "[client]" >> sudo /root/.my.cnf
+echo "password=${MYSQL_ROOT_PASSWORD}" >> sudo /root/.my.cnf
+echo "port=3306" >> sudo /root/.my.cnf
+echo "host=${MYSQL_CONTAINER_IP}" >> sudo /root/.my.cnf
 
 cd /home/ec2-user/dataman/Code/json_to_relation
 sed -i "s/--login-path=root//g" scripts/createEmptyEdxDbs.sh
