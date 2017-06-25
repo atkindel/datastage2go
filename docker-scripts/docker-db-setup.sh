@@ -53,7 +53,6 @@ echo "user=root" >> ~/.my.cnf
 echo "password=${MYSQL_ROOT_PASSWORD}" >> ~/.my.cnf
 echo "port=3306" >> ~/.my.cnf
 echo "host=${MYSQL_CONTAINER_IP}" >> ~/.my.cnf
-echo "bind-address=${MYSQL_CONTAINER_IP}" >> ~/.my.cnf
 
 cd /home/ec2-user/dataman/Code/json_to_relation
 sed -i "s/--login-path=root//g" scripts/createEmptyEdxDbs.sh
