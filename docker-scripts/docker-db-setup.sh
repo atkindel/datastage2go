@@ -14,7 +14,7 @@ COLOR_RST="\033[0m"
 
 docker inspect ${CONTAINER_NAME} > db-container-details.txt
 export MYSQL_CONTAINER_IP=$(grep "\"IPAddress\"" db-container-details.txt | cut -d '"' -f4 | sed -n 1p)
-echo $MYSQL_CONTAINER_IP
+echo "IP_ADDRESS: $MYSQL_CONTAINER_IP"
 
 echo -e "${COLOR}---Cloning OpenEdX ETL software...---${COLOR_RST}"
 
@@ -43,10 +43,10 @@ sudo chmod 777 /home/ec2-user/dataman/Data/
  
 echo -e "${COLOR}---Setup MySQL authentication...---${COLOR_RST}"
 
-echo "[client]" >> sudo /root/.my.cnf
-echo "password=${MYSQL_ROOT_PASSWORD}" >> sudo /root/.my.cnf
-echo "port=3306" >> sudo /root/.my.cnf
-echo "host=${MYSQL_CONTAINER_IP}" >> sudo /root/.my.cnf
+echo "[client]" >> ~/.my.cnf
+echo "password=${MYSQL_ROOT_PASSWORD}" >> ~/.my.cnf
+echo "port=3306" >> ~/.my.cnf
+echo "host=${MYSQL_CONTAINER_IP}" >> ~/.my.cnf
 
 cd /home/ec2-user/dataman/Code/json_to_relation
 sed -i "s/--login-path=root//g" scripts/createEmptyEdxDbs.sh
