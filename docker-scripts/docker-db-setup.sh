@@ -13,8 +13,7 @@ COLOR="\033[1;35m"
 COLOR_RST="\033[0m"
 
 docker inspect ${CONTAINER_NAME} > db-container-details.txt
-export MYSQL_CONTAINER_IP=$(grep "\"IPAddress\"" db-container-details.txt | cut
--d '"' -f4 | sed -n 1p)
+export MYSQL_CONTAINER_IP=$(grep "\"IPAddress\"" db-container-details.txt | cut -d '"' -f4 | sed -n 1p)
 echo $MYSQL_CONTAINER_IP
 
 echo -e "${COLOR}---Cloning OpenEdX ETL software...---${COLOR_RST}"
