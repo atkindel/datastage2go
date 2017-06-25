@@ -1,23 +1,23 @@
-COLOR="\033[1;35m"
-COLOR_RST="\033[0m"
+sudo -i
 
 docker pull mysql:5.7
 
-MYSQL_ROOT_PASSWORD="password"
-export MYSQL_CONTAINER_NAME="edx-database"
+echo CONTAINER_NAME="edx-database" >> /root/.bashrc
+echo MYSQL_ROOT_PASSWORD="password" >> /root/.bashrc
 
 docker run --detach \
   --env MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD} \
-  --name ${MYSQL_CONTAINER_NAME} \
-  --publish 3306:3306\
+  --name ${CONTAINER_NAME} \
+  --publish 3306:3306 \
   mysql:5.7;
 
+COLOR="\033[1;35m"
+COLOR_RST="\033[0m"
+
 sleep 10
-docker inspect ${MYSQL_CONTAINER_NAME} > db-container-details.txt
+docker inspect ${CONTAINER_NAME} > db-container-details.txt
 export MYSQL_CONTAINER_IP=$(grep IPAddress db-container-details.txt | cut -c 14- | cut -d '"' -f2)
 echo $MYSQL_CONTAINER_IP
-
-sudo -i
 
 echo -e "${COLOR}---Cloning OpenEdX ETL software...---${COLOR_RST}"
 
