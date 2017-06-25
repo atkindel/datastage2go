@@ -9,6 +9,9 @@ docker run --detach \
   --publish 3306:3306 \
   mysql:5.7;
 
+CONTAINER_NAME="edx-database"
+MYSQL_ROOT_PASSWORD="password" 
+
 COLOR="\033[1;35m"
 COLOR_RST="\033[0m"
 
