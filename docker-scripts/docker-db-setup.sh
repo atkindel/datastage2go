@@ -4,9 +4,9 @@ COLOR_RST="\033[0m"
 docker pull mysql:5.7
 
 MYSQL_ROOT_PASSWORD="password"
-MYSQL_CONTAINER_NAME="edx-database"
+export MYSQL_CONTAINER_NAME="edx-database"
 
-docker run --detach 
+docker run --detach \
   --env MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD} \
   --name ${MYSQL_CONTAINER_NAME} \
   --publish 3306:3306\
