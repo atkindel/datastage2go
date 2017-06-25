@@ -17,7 +17,7 @@ echo -e "${COLOR}---Adding main user...---${COLOR_RST}"
 
   sudo adduser dataman
   sudo adduser dataman sudo
-  echo "dataman:dataman" | chpasswd
+  echo "dataman:password" | chpasswd
 
 # Done making users
 echo -e "${COLOR}---Finished adding main user.---${COLOR_RST}"

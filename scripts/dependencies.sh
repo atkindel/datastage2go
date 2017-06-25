@@ -12,8 +12,15 @@
 COLOR="\033[1;35m"
 COLOR_RST="\033[0m"
 
+sudo apt-get install -f 
+sudo apt-get update
+echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
+
 # Install system modules
 echo -e "${COLOR}---Installing system modules...---${COLOR_RST}"
+
+  echo -e "${COLOR}---Python Daemon---${COLOR_RST}"
+  sudo apt-get install -y python-daemon
 
   echo -e "${COLOR}---git---${COLOR_RST}"
   sudo apt-get -y install git
@@ -56,9 +63,9 @@ echo -e "${COLOR}---Installing system modules...---${COLOR_RST}"
   sudo apt-get -y install php5-mysqlnd
   sudo php5enmod mysqli
 
-  # Numpy not needed unless using optional software-- see repo clones in database_config.sh
-  # echo -e "${COLOR}---Numpy---${COLOR_RST}"
-  # yes | sudo pip install numpy
+  echo -e "${COLOR}---Numpy---${COLOR_RST}"
+  yes | sudo pip install numpy
+
 
 
 # Disable apparmor
